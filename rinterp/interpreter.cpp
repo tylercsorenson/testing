@@ -136,15 +136,27 @@ void interpreter::build_expression(const string &program, unsigned index, WAE *&
         }
         index += seq_length;
     } else {
+        delete lhs;
+        lhs = nullptr;
+        delete rhs;
+        rhs = nullptr;
         throw invalid_program();
     }
 
     if (index >= program.length() || program.at(index) != ' ') {
+        delete lhs;
+        lhs = nullptr;
+        delete rhs;
+        rhs = nullptr;
         throw invalid_program();
     }
 
     index++;
     if (index >= program.length()) {
+        delete lhs;
+        lhs = nullptr;
+        delete rhs;
+        rhs = nullptr;
         throw invalid_program();
     }
     if (program.at(index) == '(') {
@@ -172,10 +184,18 @@ void interpreter::build_expression(const string &program, unsigned index, WAE *&
         }
         index += seq_length;
     } else {
+        delete lhs;
+        lhs = nullptr;
+        delete rhs;
+        rhs = nullptr;
         throw invalid_program();
     }
 
     if (index != program.length() - 1 || program.at(index) != ')') {
+        delete lhs;
+        lhs = nullptr;
+        delete rhs;
+        rhs = nullptr;
         throw invalid_program();
     }
 }
