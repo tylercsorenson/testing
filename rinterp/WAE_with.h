@@ -1,0 +1,10 @@
+//
+// Created by Tyler Sorenson on 2/1/21.
+//
+
+#ifndef RUDIMENTARY_INTERPRETER_WAE_WITH_H
+#define RUDIMENTARY_INTERPRETER_WAE_WITH_H
+
+class WAE_with {};
+
+#endif // RUDIMENTARY_INTERPRETER_WAE_WITH_H
