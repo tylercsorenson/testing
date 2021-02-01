@@ -113,11 +113,27 @@ void interpreter::build_expression(const string &program, unsigned index, WAE *&
     }
     if (program.at(index) == '(') {
         int exp_length = get_expression_length(program.substr(index));
-        lhs = parse(program.substr(index, exp_length));
+        try {
+            lhs = parse(program.substr(index, exp_length));
+        } catch (invalid_program &e) {
+            delete lhs;
+            lhs = nullptr;
+            delete rhs;
+            rhs = nullptr;
+            throw e;
+        }
         index += exp_length;
     } else if (isalnum(program.at(index))) {
         int seq_length = get_sequence_length(program.substr(index));
-        lhs = parse(program.substr(index, seq_length));
+        try {
+            lhs = parse(program.substr(index, seq_length));
+        } catch (invalid_program &e) {
+            delete lhs;
+            lhs = nullptr;
+            delete rhs;
+            rhs = nullptr;
+            throw e;
+        }
         index += seq_length;
     } else {
         throw invalid_program();
@@ -133,11 +149,27 @@ void interpreter::build_expression(const string &program, unsigned index, WAE *&
     }
     if (program.at(index) == '(') {
         int exp_length = get_expression_length(program.substr(index));
-        rhs = parse(program.substr(index, exp_length));
+        try {
+            rhs = parse(program.substr(index, exp_length));
+        } catch (invalid_program &e) {
+            delete lhs;
+            lhs = nullptr;
+            delete rhs;
+            rhs = nullptr;
+            throw e;
+        }
         index += exp_length;
     } else if (isalnum(program.at(index))) {
         int seq_length = get_sequence_length(program.substr(index));
-        rhs = parse(program.substr(index, seq_length));
+        try {
+            rhs = parse(program.substr(index, seq_length));
+        } catch (invalid_program &e) {
+            delete lhs;
+            lhs = nullptr;
+            delete rhs;
+            rhs = nullptr;
+            throw e;
+        }
         index += seq_length;
     } else {
         throw invalid_program();
