@@ -20,8 +20,8 @@ private:
     int get_expression_length(const string &input);
 
     int get_sequence_length(const string &input);
-
-    void build_expression(const string &program, int index, WAE *&lhs, WAE *&rhs);
+    
+    void build_expression(const string &program, unsigned index, WAE *&lhs, WAE *&rhs);
 
 public:
     WAE *parse(string program);

@@ -100,7 +100,8 @@ int interpreter::get_sequence_length(const string &input) {
     return length;
 }
 
-void interpreter::build_expression(const string &program, int index, WAE *&lhs, WAE *&rhs) {
+
+void interpreter::build_expression(const string &program, unsigned index, WAE *&lhs, WAE *&rhs) {
     index++;
     if (index >= program.length() || program.at(index) != ' ') {
         throw invalid_program();
