@@ -40,9 +40,9 @@ WAE *WAE_with::get_outside() const {
 }
 
 unsigned WAE_with::solve() {
-    WAE *out_copy = outside->copy();
-    WAE *temp = out_copy->subst(x->copy(), inside->copy());
-    delete out_copy;
+//    WAE *out_copy = outside->copy();
+    WAE *temp = outside->subst(x->copy(), inside->copy());
+//    delete out_copy;
     delete x;
     x = nullptr;
     delete inside;
