@@ -160,12 +160,12 @@ void tester::test_calc() {
 
     cout << endl << "invalid calculations" << endl;
     cout << "calc(parse(\"x\")): " << confirm_invalid_calculation(i.parse("x")) << endl;
-    /*cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
+    cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
     cout << "calc(parse(\"vAr\")): " << confirm_invalid_calculation(i.parse("vAr")) << endl;
     cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
     cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
     cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
-         << endl;*/
+         << endl;
 }
 
 string tester::compare_calc(unsigned actual, unsigned expected) {

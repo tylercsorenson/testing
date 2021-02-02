@@ -1,4 +1,5 @@
 #include "WAE_with.h"
+#include "invalid_calculation.h"
 
 WAE_with::WAE_with(WAE *x, WAE *inside, WAE *outside) {
     this->x = x;
@@ -51,7 +52,13 @@ unsigned WAE_with::solve() {
     inside = nullptr;
     delete outside;
     outside = nullptr;
-    unsigned result = temp->solve();
+    unsigned result = 0;
+    try {
+        result = temp->solve();
+    } catch (invalid_calculation &e) {
+        delete temp;
+        temp = nullptr;
+    }
     delete temp;
     return result;
 }
