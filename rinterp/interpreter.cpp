@@ -296,11 +296,15 @@ void interpreter::build_inbetween_brackets(const string &excerpt, WAE *&x, WAE *
 
     index += seq_length;
     if (index >= excerpt.length() || excerpt.at(index) != ' ') {
+        delete x;
+        x = nullptr;
         throw invalid_program();
     }
 
     index++;
     if (index >= excerpt.length()) {
+        delete x;
+        x = nullptr;
         throw invalid_program();
     }
     try {
