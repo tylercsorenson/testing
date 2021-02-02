@@ -62,16 +62,28 @@ WAE *interpreter::parse(string program) {
 
             index += with_brackets_length;
             if (index >= program.length() || program.at(index) != ')') {
+                delete x;
+                x = nullptr;
+                delete inside;
+                inside = nullptr;
                 throw invalid_program();
             }
 
             index++;
             if (index >= program.length() || program.at(index) != ' ') {
+                delete x;
+                x = nullptr;
+                delete inside;
+                inside = nullptr;
                 throw invalid_program();
             }
 
             index++;
             if (index >= program.length()) {
+                delete x;
+                x = nullptr;
+                delete inside;
+                inside = nullptr;
                 throw invalid_program();
             }
             WAE *outside = nullptr;
