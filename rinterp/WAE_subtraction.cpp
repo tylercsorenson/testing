@@ -8,7 +8,9 @@ WAE_subtraction::WAE_subtraction(WAE *lhs, WAE *rhs) {
 
 WAE_subtraction::~WAE_subtraction() {
     delete lhs;
+    lhs = nullptr;
     delete rhs;
+    rhs = nullptr;
 }
 
 bool WAE_subtraction::operator==(const WAE &other) const {
@@ -39,6 +41,7 @@ WAE *WAE_subtraction::subst(WAE *id, WAE *what) {
     delete lhs;
     lhs = temp;
     temp = rhs->subst(id, what);
+    delete rhs;
     rhs = temp;
     return this;
 }

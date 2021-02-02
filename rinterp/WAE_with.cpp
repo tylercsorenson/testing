@@ -9,8 +9,11 @@ WAE_with::WAE_with(WAE *x, WAE *inside, WAE *outside) {
 
 WAE_with::~WAE_with() {
     delete x;
+    x = nullptr;
     delete inside;
+    inside = nullptr;
     delete outside;
+    outside = nullptr;
 }
 
 bool WAE_with::operator==(const WAE &other) const {
@@ -43,7 +46,7 @@ unsigned WAE_with::solve() {
 }
 
 WAE *WAE_with::subst(WAE *id, WAE *what) {
-    if (x == id) {
+    if (*x == *id) {
         inside = inside->subst(id, what);
     } else {
         inside = inside->subst(id, what);

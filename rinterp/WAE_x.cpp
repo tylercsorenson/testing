@@ -23,5 +23,5 @@ WAE *WAE_x::subst(WAE *id, WAE *what) {
         return what;
     }
 
-    return this;
+    return new WAE_x(x);
 }

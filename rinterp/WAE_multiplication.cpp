@@ -33,6 +33,7 @@ WAE *WAE_multiplication::subst(WAE *id, WAE *what) {
     delete lhs;
     lhs = temp;
     temp = rhs->subst(id, what);
+    delete rhs;
     rhs = temp;
     return this;
 }
