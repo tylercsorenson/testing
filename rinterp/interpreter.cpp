@@ -5,7 +5,7 @@
 #include <stack>
 
 WAE *interpreter::parse(string program) {
-    int index = 0;
+    unsigned index = 0;
     if (isdigit(program.at(index))) {
         for (char c : program) {
             if (!isdigit(c)) {

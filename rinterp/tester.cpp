@@ -39,6 +39,33 @@ void tester::test_parse() {
          << compare(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))"),
                     new WAE_with(new WAE_x("abc"), new WAE_addition(new WAE_number(15), new WAE_number(14)),
                                  new WAE_multiplication(new WAE_number(15), new WAE_x("abc")))) << endl;
+    cout << "parse(\"(with ([abc 13]) b)\"): "
+         << compare(i.parse("(with ([abc 13]) b)"), new WAE_with(new WAE_x("abc"), new WAE_number(13), new WAE_x("b")))
+         << endl;
+    cout << "parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\"): "
+         << compare(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))"), new WAE_with(new WAE_x("a"), new WAE_number(5),
+                                                                                   new WAE_with(new WAE_x("b"),
+                                                                                                new WAE_number(3),
+                                                                                                new WAE_division(
+                                                                                                        new WAE_x("a"),
+                                                                                                        new WAE_x(
+                                                                                                                "b")))))
+         << endl;
+    cout << "parse(\"(with ([a (with ([c 3]) c)]) a)\"): " << compare(i.parse("(with ([a (with ([c 3]) c)]) a)"),
+                                                                      new WAE_with(new WAE_x("a"),
+                                                                                   new WAE_with(new WAE_x("c"),
+                                                                                                new WAE_number(3),
+                                                                                                new WAE_x("c")),
+                                                                                   new WAE_x("a"))) << endl;
+    cout << "parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\"): "
+         << compare(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)"), new WAE_with(new WAE_x("x"),
+                                                                                    new WAE_with(new WAE_x("x"),
+                                                                                                 new WAE_number(13),
+                                                                                                 new WAE_addition(
+                                                                                                         new WAE_x("x"),
+                                                                                                         new WAE_number(
+                                                                                                                 7))),
+                                                                                    new WAE_x("x"))) << endl;
 
     cout << endl << "invalid programs" << endl;
     cout << "parse(\" 2\"): " << confirm_invalid_program(" 2") << endl;
