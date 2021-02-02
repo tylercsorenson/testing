@@ -116,6 +116,8 @@ WAE *interpreter::parse(string program) {
 
 unsigned interpreter::calc(WAE *input) {
     unsigned result = input->solve();
+    delete input;
+    input = nullptr;
     return result;
 }
 

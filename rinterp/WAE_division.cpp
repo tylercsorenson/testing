@@ -29,6 +29,8 @@ unsigned WAE_division::solve() {
     if (right == 0) {
         throw invalid_calculation();
     }
+    lhs = nullptr;
+    rhs = nullptr;
     return left / right;
 }
 

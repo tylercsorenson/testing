@@ -42,6 +42,9 @@ WAE *WAE_with::get_outside() const {
 
 unsigned WAE_with::solve() {
     WAE *temp = outside->subst(x, inside);
+    x = nullptr;
+    inside = nullptr;
+    outside = nullptr;
     return temp->solve();
 }
 
