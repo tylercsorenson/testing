@@ -20,7 +20,7 @@ unsigned WAE_x::solve() {
 
 WAE *WAE_x::subst(WAE *id, WAE *what) {
     if (*this == *id) {
-        return what->copy();
+        return what;
     }
 
     return new WAE_x(x);
