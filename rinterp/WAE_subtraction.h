@@ -18,6 +18,10 @@ public:
     [[nodiscard]] WAE *get_rhs() const;
 
     bool operator==(const WAE &other) const override;
+
+    unsigned solve() override;
+
+    WAE *subst(WAE *id, WAE *what) override;
 };
 
 #endif // RUDIMENTARY_INTERPRETER_WAE_SUBTRACTION_H

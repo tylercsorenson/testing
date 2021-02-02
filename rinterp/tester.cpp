@@ -3,7 +3,6 @@
 #include <utility>
 
 void tester::test_parse() {
-    cout << boolalpha;
     cout << "testing parse" << endl << endl;
     cout << "valid programs" << endl;
     cout << "parse(\"13\"): " << compare(i.parse("13"), new WAE_number(13)) << endl;
@@ -26,12 +25,11 @@ void tester::test_parse() {
          << compare(i.parse("(+ (+ 1 3) (+ 2 8))"),
                     new WAE_addition(new WAE_addition(new WAE_number(1), new WAE_number(3)),
                                      new WAE_addition(new WAE_number(2), new WAE_number(8)))) << endl;
-
     cout << "parse(\"(+ 7 a)\"): " << compare(i.parse("(+ 7 a)"), new WAE_addition(new WAE_number(7), new WAE_x("a")))
          << endl;
-    cout << "parse(\"(+ (- 1 3) (* (/ 2 4) 8))\"): " << compare(i.parse("(+ (- 1 3) (* (/ 2 4) 8))"), new WAE_addition(
-            new WAE_subtraction(new WAE_number(1), new WAE_number(3)),
-            new WAE_multiplication(new WAE_division(new WAE_number(2), new WAE_number(4)), new WAE_number(8)))) << endl;
+    cout << "parse(\"(+ (- 3 1) (* (/ 4 2) 8))\"): " << compare(i.parse("(+ (- 3 1) (* (/ 4 2) 8))"), new WAE_addition(
+            new WAE_subtraction(new WAE_number(3), new WAE_number(1)),
+            new WAE_multiplication(new WAE_division(new WAE_number(4), new WAE_number(2)), new WAE_number(8)))) << endl;
     cout << "parse(\"(with ([a 15]) a)\"): "
          << compare(i.parse("(with ([a 15]) a)"), new WAE_with(new WAE_x("a"), new WAE_number(15), new WAE_x("a")))
          << endl;
@@ -131,6 +129,55 @@ string tester::confirm_invalid_program(const string &program) {
     try {
         i.parse(program);
     } catch (invalid_program &e) {
+        return "passed";
+    }
+    return "FAILED!!";
+}
+
+void tester::test_calc() {
+    cout << endl << endl << "testing calc" << endl << endl;
+    cout << "valid calculations" << endl;
+    cout << "calc(parse(\"13\")): " << compare_calc(i.calc(i.parse("13")), 13) << endl;
+    cout << "calc(parse(\"1\")): " << compare_calc(i.calc(i.parse("1")), 1) << endl;
+    cout << "calc(parse(\"(+ 8 13)\")): " << compare_calc(i.calc(i.parse("(+ 8 13)")), 21) << endl;
+    cout << "calc(parse(\"(+ (+ 1 3) 13)\")): " << compare_calc(i.calc(i.parse("(+ (+ 1 3) 13)")), 17) << endl;
+    cout << "calc(parse(\"(+ 7 (+ 2 8))\")): " << compare_calc(i.calc(i.parse("(+ 7 (+ 2 8))")), 17) << endl;
+    cout << "calc(parse(\"(+ (+ 1 3) (+ 2 8))\")): " << compare_calc(i.calc(i.parse("(+ (+ 1 3) (+ 2 8))")), 14)
+         << endl;
+    cout << "calc(parse(\"(+ (- 3 1) (* (/ 4 2) 8))\")): "
+         << compare_calc(i.calc(i.parse("(+ (- 3 1) (* (/ 4 2) 8))")), 18) << endl;
+    cout << "calc(parse(\"(with ([a 15]) a)\")): " << compare_calc(i.calc(i.parse("(with ([a 15]) a)")), 15) << endl;
+    cout << "calc(parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\")): "
+         << compare_calc(i.calc(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))")), 435) << endl;
+    cout << "calc(parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\")): "
+         << compare_calc(i.calc(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))")), 1) << endl;
+    cout << "calc(parse(\"(with ([a (with ([c 3]) c)]) a)\")): "
+         << compare_calc(i.calc(i.parse("(with ([a (with ([c 3]) c)]) a)")), 3) << endl;
+    cout << "calc(parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\")): "
+         << compare_calc(i.calc(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)")), 20) << endl;
+
+    cout << endl << "invalid calculations" << endl;
+    cout << "calc(parse(\"x\")): " << confirm_invalid_calculation(i.parse("x")) << endl;
+    cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
+    cout << "calc(parse(\"vAr\")): " << confirm_invalid_calculation(i.parse("vAr")) << endl;
+    cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
+    cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
+    cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
+         << endl;
+}
+
+string tester::compare_calc(unsigned actual, unsigned expected) {
+    if (actual == expected) {
+        return "passed";
+    }
+
+    return "FAILED!!";
+}
+
+string tester::confirm_invalid_calculation(WAE *input) {
+    try {
+        i.calc(input);
+    } catch (invalid_calculation &e) {
         return "passed";
     }
     return "FAILED!!";

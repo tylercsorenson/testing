@@ -5,14 +5,18 @@
 
 class WAE_number : public WAE {
 private:
-    int number;
+    unsigned number;
 
 public:
     explicit WAE_number(int number);
 
     bool operator==(const WAE &other) const override;
 
-    [[nodiscard]] int get_number() const;
+    [[nodiscard]] unsigned get_number() const;
+
+    unsigned solve() override;
+
+    WAE *subst(WAE *id, WAE *what) override;
 };
 
 #endif // RUDIMENTARY_INTERPRETER_WAE_NUMBER_H

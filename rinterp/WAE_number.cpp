@@ -10,4 +10,12 @@ bool WAE_number::operator==(const WAE &other) const {
     return false;
 }
 
-int WAE_number::get_number() const { return number; }
+unsigned WAE_number::get_number() const { return number; }
+
+unsigned WAE_number::solve() {
+    return number;
+}
+
+WAE *WAE_number::subst(WAE *id, WAE *what) {
+    return this;
+}

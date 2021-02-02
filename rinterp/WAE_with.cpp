@@ -1,4 +1,5 @@
 #include "WAE_with.h"
+#include "invalid_calculation.h"
 
 WAE_with::WAE_with(WAE *x, WAE *inside, WAE *outside) {
     this->x = x;
@@ -34,4 +35,19 @@ WAE *WAE_with::get_inside() const {
 
 WAE *WAE_with::get_outside() const {
     return outside;
+}
+
+unsigned WAE_with::solve() {
+    WAE *temp = outside->subst(x, inside);
+    return temp->solve();
+}
+
+WAE *WAE_with::subst(WAE *id, WAE *what) {
+    if (x == id) {
+        inside = inside->subst(id, what);
+    } else {
+        inside = inside->subst(id, what);
+        outside = outside->subst(id, what);
+    }
+    return this;
 }

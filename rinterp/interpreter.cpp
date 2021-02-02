@@ -114,7 +114,9 @@ WAE *interpreter::parse(string program) {
     throw invalid_program();
 }
 
-int interpreter::calc(WAE *input) { return 0; }
+unsigned interpreter::calc(WAE *input) {
+    return input->solve();
+}
 
 bool interpreter::check_parens(const string &program) {
     stack<char> paren_stack;

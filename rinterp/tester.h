@@ -5,6 +5,7 @@
 #include "WAE_with.h"
 #include "interpreter.h"
 #include "invalid_program.h"
+#include "invalid_calculation.h"
 #include <string>
 
 using namespace std;
@@ -15,10 +16,16 @@ private:
 
     string confirm_invalid_program(const string &program);
 
+    static string compare_calc(unsigned, unsigned);
+
+    string confirm_invalid_calculation(WAE *);
+
     interpreter i;
 
 public:
     void test_parse();
+
+    void test_calc();
 };
 
 #endif // RUDIMENTARY_INTERPRETER_TESTER_H

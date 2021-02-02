@@ -7,7 +7,9 @@ WAE_multiplication::WAE_multiplication(WAE *lhs, WAE *rhs) {
 
 WAE_multiplication::~WAE_multiplication() {
     delete lhs;
+    lhs = nullptr;
     delete rhs;
+    rhs = nullptr;
 }
 
 bool WAE_multiplication::operator==(const WAE &other) const {
@@ -21,3 +23,16 @@ bool WAE_multiplication::operator==(const WAE &other) const {
 WAE *WAE_multiplication::get_lhs() const { return lhs; }
 
 WAE *WAE_multiplication::get_rhs() const { return rhs; }
+
+unsigned WAE_multiplication::solve() {
+    return lhs->solve() * rhs->solve();
+}
+
+WAE *WAE_multiplication::subst(WAE *id, WAE *what) {
+    WAE *temp = lhs->subst(id, what);
+    delete lhs;
+    lhs = temp;
+    temp = rhs->subst(id, what);
+    rhs = temp;
+    return this;
+}

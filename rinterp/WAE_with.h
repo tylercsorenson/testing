@@ -9,6 +9,9 @@ private:
     WAE *x;
     WAE *inside;
     WAE *outside;
+
+    WAE *subst(WAE *id, WAE *what) override;
+
 public:
     explicit WAE_with(WAE *x = nullptr, WAE *inside = nullptr, WAE *outside = nullptr);
 
@@ -21,6 +24,8 @@ public:
     [[nodiscard]] WAE *get_outside() const;
 
     bool operator==(const WAE &other) const override;
+
+    unsigned solve() override;
 };
 
 #endif // RUDIMENTARY_INTERPRETER_WAE_WITH_H

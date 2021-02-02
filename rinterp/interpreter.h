@@ -14,8 +14,6 @@ using namespace std;
 
 class interpreter {
 private:
-    void subst();
-
     bool check_parens(const string &program);
 
     int get_expression_length(const string &input);
@@ -33,7 +31,7 @@ private:
 public:
     WAE *parse(string program);
 
-    int calc(WAE *input);
+    unsigned calc(WAE *input);
 };
 
 #endif // RUDIMENTARY_INTERPRETER_INTERPRETER_H

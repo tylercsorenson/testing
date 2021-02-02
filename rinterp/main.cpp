@@ -1,7 +1,8 @@
 #include "tester.h"
 
 int main() {
-  tester tester;
-  tester.test_parse();
+  tester test = tester();
+  test.test_parse();
+  test.test_calc();
   return 0;
 }

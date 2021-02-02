@@ -1,4 +1,6 @@
 #include "WAE_division.h"
+#include "invalid_calculation.h"
+
 WAE_division::WAE_division(WAE *lhs, WAE *rhs) {
     this->lhs = lhs;
     this->rhs = rhs;
@@ -20,3 +22,21 @@ bool WAE_division::operator==(const WAE &other) const {
 WAE *WAE_division::get_lhs() const { return lhs; }
 
 WAE *WAE_division::get_rhs() const { return rhs; }
+
+unsigned WAE_division::solve() {
+    unsigned left = lhs->solve();
+    unsigned right = rhs->solve();
+    if (right == 0) {
+        throw invalid_calculation();
+    }
+    return left / right;
+}
+
+WAE *WAE_division::subst(WAE *id, WAE *what) {
+    WAE *temp = lhs->subst(id, what);
+    delete lhs;
+    lhs = temp;
+    temp = rhs->subst(id, what);
+    rhs = temp;
+    return this;
+}

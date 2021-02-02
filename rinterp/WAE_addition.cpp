@@ -21,3 +21,16 @@ bool WAE_addition::operator==(const WAE &other) const {
 WAE *WAE_addition::get_lhs() const { return lhs; }
 
 WAE *WAE_addition::get_rhs() const { return rhs; }
+
+unsigned WAE_addition::solve() {
+    return lhs->solve() + rhs->solve();
+}
+
+WAE *WAE_addition::subst(WAE *id, WAE *what) {
+    WAE *temp = lhs->subst(id, what);
+    delete lhs;
+    lhs = temp;
+    temp = rhs->subst(id, what);
+    rhs = temp;
+    return this;
+}
