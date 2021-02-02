@@ -40,7 +40,11 @@ WAE *WAE_with::get_outside() const {
 }
 
 unsigned WAE_with::solve() {
-    WAE *temp = outside->subst(x->copy(), inside->copy());
+    WAE *x_copy = x->copy();
+    WAE *inside_copy = inside->copy();
+    WAE *temp = outside->subst(x_copy, inside_copy);
+    delete x_copy;
+    delete inside_copy;
     delete x;
     x = nullptr;
     delete inside;
@@ -58,17 +62,15 @@ WAE *WAE_with::subst(WAE *id, WAE *what) {
     WAE *inside_copy = inside->copy();
     WAE *outside_copy = outside->copy();
     if (*x == *id) {
-        WAE* temp = inside_copy;
+        WAE *temp = inside_copy;
         inside_copy = inside_copy->subst(id, what);
         delete temp;
     } else {
+        WAE *temp = inside_copy;
         inside_copy = inside_copy->subst(id, what);
+        delete temp;
         outside_copy = outside_copy->subst(id, what);
     }
-    delete id;
-    id = nullptr;
-    delete what;
-    what = nullptr;
     return new WAE_with(x_copy, inside_copy, outside_copy);
 }
 
