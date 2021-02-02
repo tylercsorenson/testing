@@ -8,7 +8,9 @@ WAE_division::WAE_division(WAE *lhs, WAE *rhs) {
 
 WAE_division::~WAE_division() {
     delete lhs;
+    lhs = nullptr;
     delete rhs;
+    rhs = nullptr;
 }
 
 bool WAE_division::operator==(const WAE &other) const {

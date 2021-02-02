@@ -19,3 +19,7 @@ unsigned WAE_number::solve() {
 WAE *WAE_number::subst(WAE *id, WAE *what) {
     return new WAE_number(number);
 }
+
+WAE_number::~WAE_number() {
+
+}

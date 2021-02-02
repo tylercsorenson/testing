@@ -146,7 +146,7 @@ void tester::test_calc() {
          << endl;
     cout << "calc(parse(\"(+ (- 3 1) (* (/ 4 2) 8))\")): "
          << compare_calc(i.calc(i.parse("(+ (- 3 1) (* (/ 4 2) 8))")), 18) << endl;
-    cout << "calc(parse(\"(with ([a 15]) a)\")): " << compare_calc(i.calc(i.parse("(with ([a 15]) a)")), 15) << endl;
+    /*cout << "calc(parse(\"(with ([a 15]) a)\")): " << compare_calc(i.calc(i.parse("(with ([a 15]) a)")), 15) << endl;
     cout << "calc(parse(\"(with ([x 5]) (with ([x 10]) x))\")): "
          << compare_calc(i.calc(i.parse("(with ([x 5]) (with ([x 10]) x))")), 10) << endl;
     cout << "calc(parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\")): "
@@ -165,7 +165,7 @@ void tester::test_calc() {
     cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
     cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
     cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
-         << endl;
+         << endl;*/
 }
 
 string tester::compare_calc(unsigned actual, unsigned expected) {

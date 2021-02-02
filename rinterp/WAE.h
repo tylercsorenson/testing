@@ -3,7 +3,7 @@
 
 class WAE {
 public:
-    virtual ~WAE() = default;;
+    virtual ~WAE() = default;
 
     virtual bool operator==(const WAE &other) const = 0;
 

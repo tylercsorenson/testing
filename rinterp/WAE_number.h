@@ -10,6 +10,8 @@ private:
 public:
     explicit WAE_number(unsigned number);
 
+    virtual ~WAE_number();
+
     bool operator==(const WAE &other) const override;
 
     [[nodiscard]] unsigned get_number() const;

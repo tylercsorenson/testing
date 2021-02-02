@@ -7,7 +7,9 @@ WAE_addition::WAE_addition(WAE *lhs, WAE *rhs) {
 
 WAE_addition::~WAE_addition() {
     delete lhs;
+    lhs = nullptr;
     delete rhs;
+    rhs = nullptr;
 }
 
 bool WAE_addition::operator==(const WAE &other) const {
