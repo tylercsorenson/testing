@@ -10,13 +10,15 @@ private:
 public:
     explicit WAE_number(unsigned number);
 
-    virtual ~WAE_number();
+    ~WAE_number() override;
 
     bool operator==(const WAE &other) const override;
 
     [[nodiscard]] unsigned get_number() const;
 
     unsigned solve() override;
+
+    WAE *copy() override;
 
     WAE *subst(WAE *id, WAE *what) override;
 };

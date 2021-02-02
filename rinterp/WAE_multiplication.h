@@ -21,6 +21,8 @@ public:
 
     unsigned solve() override;
 
+    WAE *copy() override;
+
     WAE *subst(WAE *id, WAE *what) override;
 };
 

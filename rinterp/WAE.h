@@ -5,6 +5,8 @@ class WAE {
 public:
     virtual ~WAE() = default;
 
+    virtual WAE *copy() = 0;
+
     virtual bool operator==(const WAE &other) const = 0;
 
     virtual unsigned solve() = 0;

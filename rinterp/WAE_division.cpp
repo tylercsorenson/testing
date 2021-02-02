@@ -46,3 +46,7 @@ WAE *WAE_division::subst(WAE *id, WAE *what) {
     rhs = nullptr;
     return temp;
 }
+
+WAE *WAE_division::copy() {
+    return new WAE_division(lhs->copy(), rhs->copy());
+}

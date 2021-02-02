@@ -44,3 +44,7 @@ WAE *WAE_subtraction::subst(WAE *id, WAE *what) {
     rhs = nullptr;
     return temp;
 }
+
+WAE *WAE_subtraction::copy() {
+    return new WAE_subtraction(lhs->copy(), rhs->copy());
+}

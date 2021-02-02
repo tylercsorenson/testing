@@ -13,6 +13,8 @@ private:
 public:
     explicit WAE_x(string x);
 
+    WAE *copy() override;
+
     bool operator==(const WAE &other) const override;
 
     [[nodiscard]] string get_x() const;

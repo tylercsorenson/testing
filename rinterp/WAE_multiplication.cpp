@@ -36,3 +36,7 @@ WAE *WAE_multiplication::subst(WAE *id, WAE *what) {
     rhs = nullptr;
     return temp;
 }
+
+WAE *WAE_multiplication::copy() {
+    return new WAE_multiplication(lhs->copy(), rhs->copy());
+}

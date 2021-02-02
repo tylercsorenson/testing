@@ -26,6 +26,8 @@ public:
     bool operator==(const WAE &other) const override;
 
     unsigned solve() override;
+
+    WAE *copy() override;
 };
 
 #endif // RUDIMENTARY_INTERPRETER_WAE_WITH_H

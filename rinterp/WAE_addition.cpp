@@ -36,3 +36,7 @@ WAE *WAE_addition::subst(WAE *id, WAE *what) {
     rhs = nullptr;
     return temp;
 }
+
+WAE *WAE_addition::copy() {
+    return new WAE_addition(lhs->copy(), rhs->copy());
+}
