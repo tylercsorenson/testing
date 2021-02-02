@@ -31,7 +31,9 @@ unsigned WAE_division::solve() {
     if (right == 0) {
         throw invalid_calculation();
     }
+    delete lhs;
     lhs = nullptr;
+    delete rhs;
     rhs = nullptr;
     return left / right;
 }
