@@ -48,7 +48,10 @@ unsigned WAE_with::solve() {
     inside = nullptr;
     delete outside;
     outside = nullptr;
-    return temp->solve();
+    unsigned result = temp->solve();
+    delete temp;
+    temp = nullptr;
+    return result;
 }
 
 WAE *WAE_with::subst(WAE *id, WAE *what) {
