@@ -115,7 +115,10 @@ WAE *interpreter::parse(string program) {
 }
 
 unsigned interpreter::calc(WAE *input) {
-    return input->solve();
+    unsigned result = input->solve();
+    delete input;
+    input = nullptr;
+    return result;
 }
 
 bool interpreter::check_parens(const string &program) {

@@ -138,7 +138,7 @@ void tester::test_calc() {
     cout << endl << endl << "testing calc" << endl << endl;
     cout << "valid calculations" << endl;
     cout << "calc(parse(\"13\")): " << compare_calc(i.calc(i.parse("13")), 13) << endl;
-    cout << "calc(parse(\"1\")): " << compare_calc(i.calc(i.parse("1")), 1) << endl;
+    /*cout << "calc(parse(\"1\")): " << compare_calc(i.calc(i.parse("1")), 1) << endl;
     cout << "calc(parse(\"(+ 8 13)\")): " << compare_calc(i.calc(i.parse("(+ 8 13)")), 21) << endl;
     cout << "calc(parse(\"(+ (+ 1 3) 13)\")): " << compare_calc(i.calc(i.parse("(+ (+ 1 3) 13)")), 17) << endl;
     cout << "calc(parse(\"(+ 7 (+ 2 8))\")): " << compare_calc(i.calc(i.parse("(+ 7 (+ 2 8))")), 17) << endl;
@@ -163,14 +163,13 @@ void tester::test_calc() {
     cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
     cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
     cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
-         << endl;
+         << endl;*/
 }
 
 string tester::compare_calc(unsigned actual, unsigned expected) {
     if (actual == expected) {
         return "passed";
     }
-
     return "FAILED!!";
 }
 
