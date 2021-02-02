@@ -1,6 +1,6 @@
 #include "WAE_number.h"
 
-WAE_number::WAE_number(int number) : number(number) {}
+WAE_number::WAE_number(unsigned number) : number(number) {}
 
 bool WAE_number::operator==(const WAE &other) const {
     const auto rhs = dynamic_cast<const WAE_number *>(&other);
@@ -17,5 +17,5 @@ unsigned WAE_number::solve() {
 }
 
 WAE *WAE_number::subst(WAE *id, WAE *what) {
-    return this;
+    return new WAE_number(number);
 }

@@ -8,7 +8,7 @@ private:
     unsigned number;
 
 public:
-    explicit WAE_number(int number);
+    explicit WAE_number(unsigned number);
 
     bool operator==(const WAE &other) const override;
 

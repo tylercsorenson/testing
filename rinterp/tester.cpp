@@ -149,9 +149,9 @@ void tester::test_calc() {
     cout << "calc(parse(\"(with ([a 15]) a)\")): " << compare_calc(i.calc(i.parse("(with ([a 15]) a)")), 15) << endl;
     cout << "calc(parse(\"(with ([x 5]) (with ([x 10]) x))\")): "
          << compare_calc(i.calc(i.parse("(with ([x 5]) (with ([x 10]) x))")), 10) << endl;
-    /*cout << "calc(parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\")): "
+    cout << "calc(parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\")): "
          << compare_calc(i.calc(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))")), 435) << endl;
-    cout << "calc(parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\")): "
+    /*cout << "calc(parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\")): "
           << compare_calc(i.calc(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))")), 1) << endl;
      cout << "calc(parse(\"(with ([a (with ([c 3]) c)]) a)\")): "
           << compare_calc(i.calc(i.parse("(with ([a (with ([c 3]) c)]) a)")), 3) << endl;

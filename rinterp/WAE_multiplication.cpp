@@ -29,11 +29,10 @@ unsigned WAE_multiplication::solve() {
 }
 
 WAE *WAE_multiplication::subst(WAE *id, WAE *what) {
-    WAE *temp = lhs->subst(id, what);
+    WAE *temp = new WAE_multiplication(lhs->subst(id, what), rhs->subst(id, what));
     delete lhs;
-    lhs = temp;
-    temp = rhs->subst(id, what);
+    lhs = nullptr;
     delete rhs;
-    rhs = temp;
-    return this;
+    rhs = nullptr;
+    return temp;
 }
