@@ -158,9 +158,9 @@ void tester::test_calc() {
     cout << "calc(parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\")): "
          << compare_calc(i.calc(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)")), 20) << endl;
 
-    /*cout << endl << "invalid calculations" << endl;
+    cout << endl << "invalid calculations" << endl;
     cout << "calc(parse(\"x\")): " << confirm_invalid_calculation(i.parse("x")) << endl;
-    cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
+    /*cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
     cout << "calc(parse(\"vAr\")): " << confirm_invalid_calculation(i.parse("vAr")) << endl;
     cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
     cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;

@@ -2,6 +2,7 @@
 #include <istream>
 
 #include "interpreter.h"
+#include "invalid_calculation.h"
 #include <stack>
 
 WAE *interpreter::parse(string program) {
@@ -115,7 +116,13 @@ WAE *interpreter::parse(string program) {
 }
 
 unsigned interpreter::calc(WAE *input) {
-    unsigned result = input->solve();
+    unsigned result = 0;
+    try {
+        result = input->solve();
+    } catch (invalid_calculation &e) {
+        delete input;
+        throw e;
+    }
     delete input;
 //    input = nullptr;
     return result;
