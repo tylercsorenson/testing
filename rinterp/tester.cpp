@@ -100,7 +100,21 @@ void tester::test_parse() {
     cout << "parse(\"(+ * 8)\"): " << confirm_invalid_program("(+ * 8)") << endl;
     cout << "parse(\"(++ 8 7)\"): " << confirm_invalid_program("(++ 8 7)") << endl;
     cout << "parse(\"(7 - 2)\"): " << confirm_invalid_program("(7 - 2)") << endl;
-
+    cout << "parse(\"(with [x 1] x)\"): " << confirm_invalid_program("(with [x 1] x)") << endl;
+    cout << "parse(\"( with ([a 13]) a)\"): " << confirm_invalid_program("( with ([a 13]) a)") << endl;
+    cout << "parse(\"(with  ([a 13]) a)\"): " << confirm_invalid_program("(with  ([a 13]) a)") << endl;
+    cout << "parse(\"(with ( [a 13]) a)\"): " << confirm_invalid_program("(with ( [a 13]) a)") << endl;
+    cout << "parse(\"(with ([ a 13]) a)\"): " << confirm_invalid_program("(with ([ a 13]) a)") << endl;
+    cout << "parse(\"(with ([a  13]) a)\"): " << confirm_invalid_program("(with ([a  13]) a)") << endl;
+    cout << "parse(\"(with ([a 13 ]) a)\"): " << confirm_invalid_program("(with ([a 13 ]) a)") << endl;
+    cout << "parse(\"(with ([a 13] ) a)\"): " << confirm_invalid_program("(with ([a 13] ) a)") << endl;
+    cout << "parse(\"(with ([a 13])  a)\"): " << confirm_invalid_program("(with ([a 13])  a)") << endl;
+    cout << "parse(\"(with ([a 13]) a )\"): " << confirm_invalid_program("(with ([a 13]) a )") << endl;
+    cout << "parse(\"(with (x 1]) x)\"): " << confirm_invalid_program("(with (x 1]) x)") << endl;
+    cout << "parse(\"(with ([x 1) x)\"): " << confirm_invalid_program("(with ([x 1) x)") << endl;
+    cout << "parse(\"(with ([x 1]) x))\"): " << confirm_invalid_program("(with ([x 1]) x))") << endl;
+    cout << "parse(\"(with ([x 1)] x)\"): " << confirm_invalid_program("(with ([x 1)] x)") << endl;
+    cout << "parse(\"(with ([x 1]) (+ x 2)))\"): " << confirm_invalid_program("(with ([x 1]) (+ x 2)))") << endl;
 }
 
 string tester::compare(const WAE *actual, const WAE *expected) {
