@@ -1,7 +1,3 @@
-//
-// Created by Tyler Sorenson on 2/1/21.
-//
-
 #ifndef RUDIMENTARY_INTERPRETER_WAE_NUMBER_H
 #define RUDIMENTARY_INTERPRETER_WAE_NUMBER_H
 
@@ -9,12 +5,14 @@
 
 class WAE_number : public WAE {
 private:
-  double number;
+    int number;
 
 public:
-  explicit WAE_number(double number);
-  bool operator==(const WAE &other) const override;
-  [[nodiscard]] double get_number() const;
+    explicit WAE_number(int number);
+
+    bool operator==(const WAE &other) const override;
+
+    [[nodiscard]] int get_number() const;
 };
 
 #endif // RUDIMENTARY_INTERPRETER_WAE_NUMBER_H

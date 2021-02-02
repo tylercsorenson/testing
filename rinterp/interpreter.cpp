@@ -12,21 +12,13 @@ WAE *interpreter::parse(string program) {
                 throw invalid_program();
             }
         }
-        double value = stod(program);
+        int value = stoi(program);
         if (value == 0) {
             throw invalid_program();
         }
         return new WAE_number(value);
     } else if (isalpha(program.at(index))) {
-        if (program == "with") {
-            throw invalid_program();
-        }
-        for (char c : program) {
-            if (!isalpha(c)) {
-                throw invalid_program();
-            }
-        }
-        return new WAE_x(program);
+        return build_x(program);
     } else if (program.at(index) == '(') {
         WAE *lhs = nullptr;
         WAE *rhs = nullptr;
@@ -47,20 +39,83 @@ WAE *interpreter::parse(string program) {
             build_expression(program, index, lhs, rhs);
             return new WAE_division(lhs, rhs);
         } else if (program.length() >= 5 && program.substr(index, 4) == "with") {
+            index += 4;
+            if (index >= program.length() || program.at(index) != ' ') {
+                throw invalid_program();
+            }
+
+            index++;
+            if (index >= program.length() || program.at(index) != '(') {
+                throw invalid_program();
+            }
+
+            index++;
+            if (index >= program.length() || program.at(index) != '[') {
+                throw invalid_program();
+            }
+            int with_brackets_length = get_with_brackets_length(program.substr(index));
+
+            WAE *x = nullptr;
+            WAE *inside = nullptr;
+
+            build_inbetween_brackets(program.substr(index + 1, with_brackets_length - 2), x, inside);
+
+            index += with_brackets_length;
+            if (index >= program.length() || program.at(index) != ')') {
+                throw invalid_program();
+            }
+
+            index++;
+            if (index >= program.length() || program.at(index) != ' ') {
+                throw invalid_program();
+            }
+
+            index++;
+            if (index >= program.length()) {
+                throw invalid_program();
+            }
+            WAE *outside = nullptr;
+            try {
+                unsigned remaining_chars = program.length() - index;
+                outside = parse(program.substr(index, remaining_chars - 1));
+            } catch (invalid_program &e) {
+                delete x;
+                x = nullptr;
+                delete inside;
+                inside = nullptr;
+                throw e;
+            }
+
+            if (program.at(program.length() - 1) != ')') {
+                delete x;
+                x = nullptr;
+                delete inside;
+                inside = nullptr;
+                delete outside;
+                outside = nullptr;
+                throw invalid_program();
+            }
+
+            return new WAE_with(x, inside, outside);
         }
     }
     throw invalid_program();
 }
 
-double interpreter::calc(WAE *input) { return 0; }
+int interpreter::calc(WAE *input) { return 0; }
 
 bool interpreter::check_parens(const string &program) {
     stack<char> paren_stack;
     for (char c : program) {
-        if (c == '(') {
+        if (c == '(' || c == '[') {
             paren_stack.emplace(c);
         } else if (c == ')') {
-            if (paren_stack.empty()) {
+            if (paren_stack.empty() or paren_stack.top() == '[') {
+                return false;
+            }
+            paren_stack.pop();
+        } else if (c == ']') {
+            if (paren_stack.empty() or paren_stack.top() == '(') {
                 return false;
             }
             paren_stack.pop();
@@ -100,6 +155,17 @@ int interpreter::get_sequence_length(const string &input) {
     return length;
 }
 
+WAE *interpreter::build_x(const string &program) {
+    if (program == "with") {
+        throw invalid_program();
+    }
+    for (char c : program) {
+        if (!isalpha(c)) {
+            throw invalid_program();
+        }
+    }
+    return new WAE_x(program);
+}
 
 void interpreter::build_expression(const string &program, unsigned index, WAE *&lhs, WAE *&rhs) {
     index++;
@@ -200,4 +266,48 @@ void interpreter::build_expression(const string &program, unsigned index, WAE *&
     }
 }
 
+int interpreter::get_with_brackets_length(const string &input) {
+    stack<char> bracket_stack;
+    int length = 0;
+    for (char c : input) {
+        length++;
+        if (c == '[') {
+            bracket_stack.emplace(c);
+        } else if (c == ']') {
+            if (bracket_stack.empty()) {
+                return false;
+            }
+            bracket_stack.pop();
+            if (bracket_stack.empty()) {
+                return length;
+            }
+        }
+    }
+    return length;
+}
 
+void interpreter::build_inbetween_brackets(const string &excerpt, WAE *&x, WAE *&inside) {
+    unsigned index = 0;
+    if (index >= excerpt.length()) {
+        throw invalid_program();
+    }
+    int seq_length = get_sequence_length(excerpt);
+    x = build_x(excerpt.substr(index, seq_length));
+
+    index += seq_length;
+    if (index >= excerpt.length() || excerpt.at(index) != ' ') {
+        throw invalid_program();
+    }
+
+    index++;
+    if (index >= excerpt.length()) {
+        throw invalid_program();
+    }
+    try {
+        inside = parse(excerpt.substr(index));
+    } catch (invalid_program &e) {
+        delete x;
+        x = nullptr;
+        throw e;
+    }
+}

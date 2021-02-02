@@ -32,6 +32,13 @@ void tester::test_parse() {
     cout << "parse(\"(+ (- 1 3) (* (/ 2 4) 8))\"): " << compare(i.parse("(+ (- 1 3) (* (/ 2 4) 8))"), new WAE_addition(
             new WAE_subtraction(new WAE_number(1), new WAE_number(3)),
             new WAE_multiplication(new WAE_division(new WAE_number(2), new WAE_number(4)), new WAE_number(8)))) << endl;
+    cout << "parse(\"(with ([a 15]) a)\"): "
+         << compare(i.parse("(with ([a 15]) a)"), new WAE_with(new WAE_x("a"), new WAE_number(15), new WAE_x("a")))
+         << endl;
+    cout << "parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\"): "
+         << compare(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))"),
+                    new WAE_with(new WAE_x("abc"), new WAE_addition(new WAE_number(15), new WAE_number(14)),
+                                 new WAE_multiplication(new WAE_number(15), new WAE_x("abc")))) << endl;
 
     cout << endl << "invalid programs" << endl;
     cout << "parse(\" 2\"): " << confirm_invalid_program(" 2") << endl;

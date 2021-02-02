@@ -2,6 +2,7 @@
 #define RUDIMENTARY_INTERPRETER_TESTER_H
 
 #include "WAE_x.h"
+#include "WAE_with.h"
 #include "interpreter.h"
 #include "invalid_program.h"
 #include <string>
