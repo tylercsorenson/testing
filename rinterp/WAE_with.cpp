@@ -58,11 +58,17 @@ WAE *WAE_with::subst(WAE *id, WAE *what) {
     WAE *inside_copy = inside->copy();
     WAE *outside_copy = outside->copy();
     if (*x == *id) {
+        WAE* temp = inside_copy;
         inside_copy = inside_copy->subst(id, what);
+        delete temp;
     } else {
         inside_copy = inside_copy->subst(id, what);
         outside_copy = outside_copy->subst(id, what);
     }
+    delete id;
+    id = nullptr;
+    delete what;
+    what = nullptr;
     return new WAE_with(x_copy, inside_copy, outside_copy);
 }
 
