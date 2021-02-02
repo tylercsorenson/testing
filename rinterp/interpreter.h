@@ -8,21 +8,24 @@
 #include "WAE_number.h"
 #include "WAE_x.h"
 #include "WAE_with.h"
+#include "invalid_calculation.h"
+#include <stack>
+#include <istream>
 #include <string>
 
 using namespace std;
 
 class interpreter {
 private:
-    bool check_parens(const string &program);
+    static bool check_parens(const string &program);
 
-    int get_expression_length(const string &input);
+    static int get_expression_length(const string &input);
 
-    int get_with_brackets_length(const string &input);
+    static int get_with_brackets_length(const string &input);
 
-    int get_sequence_length(const string &input);
+    static int get_sequence_length(const string &input);
 
-    WAE *build_x(const string &program);
+    static WAE *build_x(const string &program);
 
     void build_expression(const string &program, unsigned index, WAE *&lhs, WAE *&rhs);
 
@@ -31,7 +34,7 @@ private:
 public:
     WAE *parse(string program);
 
-    unsigned calc(WAE *input);
+    static unsigned calc(WAE *input);
 };
 
 #endif // RUDIMENTARY_INTERPRETER_INTERPRETER_H

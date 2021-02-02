@@ -1,6 +1,9 @@
 #ifndef RUDIMENTARY_INTERPRETER_WAE_H
 #define RUDIMENTARY_INTERPRETER_WAE_H
 
+#include "invalid_calculation.h"
+#include "invalid_program.h"
+
 class WAE {
 public:
     virtual ~WAE() = default;

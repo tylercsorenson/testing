@@ -1,5 +1,4 @@
 #include "WAE_subtraction.h"
-#include "invalid_calculation.h"
 
 WAE_subtraction::WAE_subtraction(WAE *lhs, WAE *rhs) {
     this->lhs = lhs;

@@ -1,6 +1,4 @@
 #include "WAE_x.h"
-#include <utility>
-#include "invalid_calculation.h"
 
 WAE_x::WAE_x(string x) : x(std::move(x)) {}
 

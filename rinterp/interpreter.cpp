@@ -1,9 +1,4 @@
-#include "invalid_program.h"
-#include <istream>
-
 #include "interpreter.h"
-#include "invalid_calculation.h"
-#include <stack>
 
 WAE *interpreter::parse(string program) {
     unsigned index = 0;
@@ -87,7 +82,7 @@ WAE *interpreter::parse(string program) {
                 inside = nullptr;
                 throw invalid_program();
             }
-            WAE *outside = nullptr;
+            WAE *outside;
             try {
                 unsigned remaining_chars = program.length() - index;
                 outside = parse(program.substr(index, remaining_chars - 1));
@@ -105,7 +100,6 @@ WAE *interpreter::parse(string program) {
                 delete inside;
                 inside = nullptr;
                 delete outside;
-                outside = nullptr;
                 throw invalid_program();
             }
 
@@ -116,7 +110,7 @@ WAE *interpreter::parse(string program) {
 }
 
 unsigned interpreter::calc(WAE *input) {
-    unsigned result = 0;
+    unsigned result;
     try {
         result = input->solve();
     } catch (invalid_calculation &e) {
@@ -124,7 +118,6 @@ unsigned interpreter::calc(WAE *input) {
         throw e;
     }
     delete input;
-//    input = nullptr;
     return result;
 }
 

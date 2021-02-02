@@ -3,6 +3,7 @@
 
 #include "WAE.h"
 #include <string>
+#include <utility>
 
 using namespace std;
 

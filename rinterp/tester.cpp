@@ -1,6 +1,4 @@
 #include "tester.h"
-#include <iostream>
-#include <utility>
 
 void tester::test_parse() {
     cout << "testing parse" << endl << endl;
@@ -11,20 +9,17 @@ void tester::test_parse() {
     cout << "parse(\"hello\"): " << compare(i.parse("hello"), new WAE_x("hello")) << endl;
     cout << "parse(\"vAr\"): " << compare(i.parse("vAr"), new WAE_x("vAr")) << endl;
     cout << "parse(\"wITH\"): " << compare(i.parse("wITH"), new WAE_x("wITH")) << endl;
-    cout << "parse(\"(+ 8 13)\"): " << compare(i.parse("(+ 8 13)"), new WAE_addition(new WAE_number(8),
-                                                                                     new WAE_number(13))) << endl;
-    cout << "parse(\"(+ (+ 1 3) 13)\"): "
-         << compare(i.parse("(+ (+ 1 3) 13)"),
-                    new WAE_addition(new WAE_addition(new WAE_number(1), new WAE_number(3)), new WAE_number(13)))
-         << endl;
+    cout << "parse(\"(+ 8 13)\"): "
+         << compare(i.parse("(+ 8 13)"), new WAE_addition(new WAE_number(8), new WAE_number(13))) << endl;
+    cout << "parse(\"(+ (+ 1 3) 13)\"): " << compare(i.parse("(+ (+ 1 3) 13)"), new WAE_addition(
+            new WAE_addition(new WAE_number(1), new WAE_number(3)), new WAE_number(13))) << endl;
     cout << "parse(\"(+ 7 (+ 2 8))\"): "
          << compare(i.parse("(+ 7 (+ 2 8))"),
                     new WAE_addition(new WAE_number(7), new WAE_addition(new WAE_number(2), new WAE_number(8))))
          << endl;
-    cout << "parse(\"(+ (+ 1 3) (+ 2 8))\"): "
-         << compare(i.parse("(+ (+ 1 3) (+ 2 8))"),
-                    new WAE_addition(new WAE_addition(new WAE_number(1), new WAE_number(3)),
-                                     new WAE_addition(new WAE_number(2), new WAE_number(8)))) << endl;
+    cout << "parse(\"(+ (+ 1 3) (+ 2 8))\"): " << compare(i.parse("(+ (+ 1 3) (+ 2 8))"), new WAE_addition(
+            new WAE_addition(new WAE_number(1), new WAE_number(3)),
+            new WAE_addition(new WAE_number(2), new WAE_number(8)))) << endl;
     cout << "parse(\"(+ 7 a)\"): " << compare(i.parse("(+ 7 a)"), new WAE_addition(new WAE_number(7), new WAE_x("a")))
          << endl;
     cout << "parse(\"(+ (- 3 1) (* (/ 4 2) 8))\"): " << compare(i.parse("(+ (- 3 1) (* (/ 4 2) 8))"), new WAE_addition(
@@ -41,29 +36,19 @@ void tester::test_parse() {
          << compare(i.parse("(with ([abc 13]) b)"), new WAE_with(new WAE_x("abc"), new WAE_number(13), new WAE_x("b")))
          << endl;
     cout << "parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\"): "
-         << compare(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))"), new WAE_with(new WAE_x("a"), new WAE_number(5),
-                                                                                   new WAE_with(new WAE_x("b"),
-                                                                                                new WAE_number(3),
-                                                                                                new WAE_division(
-                                                                                                        new WAE_x("a"),
-                                                                                                        new WAE_x(
-                                                                                                                "b")))))
-         << endl;
-    cout << "parse(\"(with ([a (with ([c 3]) c)]) a)\"): " << compare(i.parse("(with ([a (with ([c 3]) c)]) a)"),
-                                                                      new WAE_with(new WAE_x("a"),
-                                                                                   new WAE_with(new WAE_x("c"),
-                                                                                                new WAE_number(3),
-                                                                                                new WAE_x("c")),
-                                                                                   new WAE_x("a"))) << endl;
+         << compare(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))"),
+                    new WAE_with(new WAE_x("a"), new WAE_number(5),
+                                 new WAE_with(new WAE_x("b"), new WAE_number(3),
+                                              new WAE_division(new WAE_x("a"), new WAE_x("b"))))) << endl;
+    cout << "parse(\"(with ([a (with ([c 3]) c)]) a)\"): "
+         << compare(i.parse("(with ([a (with ([c 3]) c)]) a)"),
+                    new WAE_with(new WAE_x("a"), new WAE_with(new WAE_x("c"), new WAE_number(3), new WAE_x("c")),
+                                 new WAE_x("a"))) << endl;
     cout << "parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\"): "
-         << compare(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)"), new WAE_with(new WAE_x("x"),
-                                                                                    new WAE_with(new WAE_x("x"),
-                                                                                                 new WAE_number(13),
-                                                                                                 new WAE_addition(
-                                                                                                         new WAE_x("x"),
-                                                                                                         new WAE_number(
-                                                                                                                 7))),
-                                                                                    new WAE_x("x"))) << endl;
+         << compare(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)"),
+                    new WAE_with(new WAE_x("x"), new WAE_with(new WAE_x("x"), new WAE_number(13),
+                                                              new WAE_addition(new WAE_x("x"), new WAE_number(7))),
+                                 new WAE_x("x"))) << endl;
 
     cout << endl << "invalid programs" << endl;
     cout << "parse(\" 2\"): " << confirm_invalid_program(" 2") << endl;
@@ -113,6 +98,9 @@ void tester::test_parse() {
     cout << "parse(\"(with ([x 1]) x))\"): " << confirm_invalid_program("(with ([x 1]) x))") << endl;
     cout << "parse(\"(with ([x 1)] x)\"): " << confirm_invalid_program("(with ([x 1)] x)") << endl;
     cout << "parse(\"(with ([x 1]) (+ x 2)))\"): " << confirm_invalid_program("(with ([x 1]) (+ x 2)))") << endl;
+    cout << "parse(\"(* 4 0)\"): " << confirm_invalid_program("(* 4 0)") << endl;
+    cout << "parse(\"(+ 0 2)\"): " << confirm_invalid_program("(+ 0 2)") << endl;
+    cout << "parse(\"(with ([x 1]) (/ x 0))\"): " << confirm_invalid_program("(with ([x 1]) (/ x 0))") << endl;
 }
 
 string tester::compare(const WAE *actual, const WAE *expected) {
@@ -137,26 +125,31 @@ string tester::confirm_invalid_program(const string &program) {
 void tester::test_calc() {
     cout << endl << endl << "testing calc" << endl << endl;
     cout << "valid calculations" << endl;
-    cout << "calc(parse(\"13\")): " << compare_calc(i.calc(i.parse("13")), 13) << endl;
-    cout << "calc(parse(\"1\")): " << compare_calc(i.calc(i.parse("1")), 1) << endl;
-    cout << "calc(parse(\"(+ 8 13)\")): " << compare_calc(i.calc(i.parse("(+ 8 13)")), 21) << endl;
-    cout << "calc(parse(\"(+ (+ 1 3) 13)\")): " << compare_calc(i.calc(i.parse("(+ (+ 1 3) 13)")), 17) << endl;
-    cout << "calc(parse(\"(+ 7 (+ 2 8))\")): " << compare_calc(i.calc(i.parse("(+ 7 (+ 2 8))")), 17) << endl;
-    cout << "calc(parse(\"(+ (+ 1 3) (+ 2 8))\")): " << compare_calc(i.calc(i.parse("(+ (+ 1 3) (+ 2 8))")), 14)
+    cout << "calc(parse(\"13\")): " << compare_calc(interpreter::calc(i.parse("13")), 13) << endl;
+    cout << "calc(parse(\"1\")): " << compare_calc(interpreter::calc(i.parse("1")), 1) << endl;
+    cout << "calc(parse(\"(+ 8 13)\")): " << compare_calc(interpreter::calc(i.parse("(+ 8 13)")), 21) << endl;
+    cout << "calc(parse(\"(+ (+ 1 3) 13)\")): " << compare_calc(interpreter::calc(i.parse("(+ (+ 1 3) 13)")), 17)
          << endl;
+    cout << "calc(parse(\"(+ 7 (+ 2 8))\")): " << compare_calc(interpreter::calc(i.parse("(+ 7 (+ 2 8))")), 17) << endl;
+    cout << "calc(parse(\"(+ (+ 1 3) (+ 2 8))\")): "
+         << compare_calc(interpreter::calc(i.parse("(+ (+ 1 3) (+ 2 8))")), 14) << endl;
     cout << "calc(parse(\"(+ (- 3 1) (* (/ 4 2) 8))\")): "
-         << compare_calc(i.calc(i.parse("(+ (- 3 1) (* (/ 4 2) 8))")), 18) << endl;
-    cout << "calc(parse(\"(with ([a 15]) a)\")): " << compare_calc(i.calc(i.parse("(with ([a 15]) a)")), 15) << endl;
+         << compare_calc(interpreter::calc(i.parse("(+ (- 3 1) (* (/ 4 2) 8))")), 18) << endl;
+    cout << "calc(parse(\"(/ 10 4)\")): " << compare_calc(interpreter::calc(i.parse("(/ 10 4)")), 2) << endl;
+    cout << "calc(parse(\"(with ([a 15]) a)\")): " << compare_calc(interpreter::calc(i.parse("(with ([a 15]) a)")), 15)
+         << endl;
     cout << "calc(parse(\"(with ([x 5]) (with ([x 10]) x))\")): "
-         << compare_calc(i.calc(i.parse("(with ([x 5]) (with ([x 10]) x))")), 10) << endl;
+         << compare_calc(interpreter::calc(i.parse("(with ([x 5]) (with ([x 10]) x))")), 10) << endl;
     cout << "calc(parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\")): "
-         << compare_calc(i.calc(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))")), 435) << endl;
+         << compare_calc(interpreter::calc(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))")), 435) << endl;
     cout << "calc(parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\")): "
-         << compare_calc(i.calc(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))")), 1) << endl;
+         << compare_calc(interpreter::calc(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))")), 1) << endl;
     cout << "calc(parse(\"(with ([a (with ([c 3]) c)]) a)\")): "
-         << compare_calc(i.calc(i.parse("(with ([a (with ([c 3]) c)]) a)")), 3) << endl;
+         << compare_calc(interpreter::calc(i.parse("(with ([a (with ([c 3]) c)]) a)")), 3) << endl;
     cout << "calc(parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\")): "
-         << compare_calc(i.calc(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)")), 20) << endl;
+         << compare_calc(interpreter::calc(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)")), 20) << endl;
+    cout << "calc(parse(\"(+ 5 (with ([yeet 13]) (/ yeet 3)))\")): "
+         << compare_calc(interpreter::calc(i.parse("(+ 5 (with ([yeet 13]) (/ yeet 3)))")), 9) << endl;
 
     cout << endl << "invalid calculations" << endl;
     cout << "calc(parse(\"x\")): " << confirm_invalid_calculation(i.parse("x")) << endl;
@@ -166,6 +159,9 @@ void tester::test_calc() {
     cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
     cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
          << endl;
+    cout << "calc(parse(\"(- 4 4)\")): " << confirm_invalid_calculation(i.parse("(- 4 4)")) << endl;
+    cout << "calc(parse(\"(- 4 5)\")): " << confirm_invalid_calculation(i.parse("(- 4 5)")) << endl;
+    cout << "calc(parse(\"(/ 13 (- 4 4))\")): " << confirm_invalid_calculation(i.parse("(/ 13 (- 4 4))")) << endl;
 }
 
 string tester::compare_calc(unsigned actual, unsigned expected) {
@@ -177,9 +173,58 @@ string tester::compare_calc(unsigned actual, unsigned expected) {
 
 string tester::confirm_invalid_calculation(WAE *input) {
     try {
-        i.calc(input);
+        interpreter::calc(input);
     } catch (invalid_calculation &e) {
+        return "passed";
+    } catch (invalid_program &e) {
         return "passed";
     }
     return "FAILED!!";
+}
+
+void tester::test_subst() {
+    cout << endl << endl << "testing subst" << endl;
+    cout << "13 -> subst(a, 15): "
+         << compare_subst(new WAE_number(13), new WAE_x("a"), new WAE_number(15), new WAE_number(13)) << endl;
+    cout << "hello -> subst(hello, (+ 1 3)): "
+         << compare_subst(new WAE_x("hello"), new WAE_x("hello"),
+                          new WAE_addition(new WAE_number(1), new WAE_number(3)),
+                          new WAE_addition(new WAE_number(1), new WAE_number(3))) << endl;
+    cout << "(+ 7 a) -> subst(a, 15): "
+         << compare_subst(new WAE_addition(new WAE_number(7), new WAE_x("a")), new WAE_x("a"), new WAE_number(15),
+                          new WAE_addition(new WAE_number(7), new WAE_number(15))) << endl;
+    cout << "a -> subst(a, 15): "
+         << compare_subst(new WAE_x("a"), new WAE_x("a"), new WAE_number(15), new WAE_number(15)) << endl;
+    cout << "(with ([x 10]) x) -> subst(x, 5): "
+         << compare_subst(new WAE_with(new WAE_x("x"), new WAE_number(10), new WAE_x("x")), new WAE_x("x"),
+                          new WAE_number(5), new WAE_with(new WAE_x("x"), new WAE_number(10), new WAE_x("x"))) << endl;
+    cout << "(* 15 abc) -> subst(abc, (+ 15 14)): "
+         << compare_subst(new WAE_multiplication(new WAE_number(15), new WAE_x("abc")), new WAE_x("abc"),
+                          new WAE_addition(new WAE_number(15), new WAE_number(14)),
+                          new WAE_multiplication(new WAE_number(15),
+                                                 new WAE_addition(new WAE_number(15), new WAE_number(14)))) << endl;
+    cout << "(with ([b 3]) (/ a b)) -> subst(a, 5): "
+         << compare_subst(
+                 new WAE_with(new WAE_x("b"), new WAE_number(3), new WAE_division(new WAE_x("a"), new WAE_x("b"))),
+                 new WAE_x("a"), new WAE_number(5),
+                 new WAE_with(new WAE_x("b"), new WAE_number(3), new WAE_division(new WAE_number(5), new WAE_x("b"))))
+         << endl;
+    cout << "a -> subst(a, (with ([c 3]) c)): "
+         << compare_subst(new WAE_x("a"), new WAE_x("a"),
+                          new WAE_with(new WAE_x("c"), new WAE_number(3), new WAE_x("c")),
+                          new WAE_with(new WAE_x("c"), new WAE_number(3), new WAE_x("c"))) << endl;
+}
+
+string tester::compare_subst(WAE *in, WAE *id, WAE *what, WAE *expected) {
+    string result = "FAILED!!";
+    WAE *actual = in->subst(id, what);
+    if (*actual == *expected) {
+        result = "passed";
+    }
+    delete in;
+    delete id;
+    delete what;
+    delete actual;
+    delete expected;
+    return result;
 }

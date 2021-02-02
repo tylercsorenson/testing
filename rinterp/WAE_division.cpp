@@ -1,5 +1,4 @@
 #include "WAE_division.h"
-#include "invalid_calculation.h"
 
 WAE_division::WAE_division(WAE *lhs, WAE *rhs) {
     this->lhs = lhs;
