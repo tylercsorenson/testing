@@ -53,7 +53,6 @@ unsigned WAE_with::solve() {
     outside = nullptr;
     unsigned result = temp->solve();
     delete temp;
-    temp = nullptr;
     return result;
 }
 
