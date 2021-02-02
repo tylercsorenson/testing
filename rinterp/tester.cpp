@@ -151,21 +151,21 @@ void tester::test_calc() {
          << compare_calc(i.calc(i.parse("(with ([x 5]) (with ([x 10]) x))")), 10) << endl;
     cout << "calc(parse(\"(with ([abc (+ 15 14)]) (* 15 abc))\")): "
          << compare_calc(i.calc(i.parse("(with ([abc (+ 15 14)]) (* 15 abc))")), 435) << endl;
-    /*cout << "calc(parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\")): "
-          << compare_calc(i.calc(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))")), 1) << endl;
-     cout << "calc(parse(\"(with ([a (with ([c 3]) c)]) a)\")): "
-          << compare_calc(i.calc(i.parse("(with ([a (with ([c 3]) c)]) a)")), 3) << endl;
-     cout << "calc(parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\")): "
-          << compare_calc(i.calc(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)")), 20) << endl;
+    cout << "calc(parse(\"(with ([a 5]) (with ([b 3]) (/ a b)))\")): "
+         << compare_calc(i.calc(i.parse("(with ([a 5]) (with ([b 3]) (/ a b)))")), 1) << endl;
+    cout << "calc(parse(\"(with ([a (with ([c 3]) c)]) a)\")): "
+         << compare_calc(i.calc(i.parse("(with ([a (with ([c 3]) c)]) a)")), 3) << endl;
+    cout << "calc(parse(\"(with ([x (with ([x 13]) (+ x 7))]) x)\")): "
+         << compare_calc(i.calc(i.parse("(with ([x (with ([x 13]) (+ x 7))]) x)")), 20) << endl;
 
-     cout << endl << "invalid calculations" << endl;
-     cout << "calc(parse(\"x\")): " << confirm_invalid_calculation(i.parse("x")) << endl;
-     cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
-     cout << "calc(parse(\"vAr\")): " << confirm_invalid_calculation(i.parse("vAr")) << endl;
-     cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
-     cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
-     cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
-          << endl;*/
+    cout << endl << "invalid calculations" << endl;
+    cout << "calc(parse(\"x\")): " << confirm_invalid_calculation(i.parse("x")) << endl;
+    cout << "calc(parse(\"hello\")): " << confirm_invalid_calculation(i.parse("hello")) << endl;
+    cout << "calc(parse(\"vAr\")): " << confirm_invalid_calculation(i.parse("vAr")) << endl;
+    cout << "calc(parse(\"wITH\")): " << confirm_invalid_calculation(i.parse("wITH")) << endl;
+    cout << "calc(parse(\"(+ 7 a)\")): " << confirm_invalid_calculation(i.parse("(+ 7 a)")) << endl;
+    cout << "calc(parse(\"(with ([abc 13]) b)\")): " << confirm_invalid_calculation(i.parse("(with ([abc 13]) b)"))
+         << endl;
 }
 
 string tester::compare_calc(unsigned actual, unsigned expected) {

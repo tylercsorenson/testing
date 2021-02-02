@@ -27,10 +27,10 @@ unsigned WAE_addition::solve() {
 }
 
 WAE *WAE_addition::subst(WAE *id, WAE *what) {
-    WAE *temp = lhs->subst(id, what);
+    WAE *temp = new WAE_addition(lhs->subst(id, what), rhs->subst(id, what));
     delete lhs;
-    lhs = temp;
-    temp = rhs->subst(id, what);
-    rhs = temp;
-    return this;
+    lhs = nullptr;
+    delete rhs;
+    rhs = nullptr;
+    return temp;
 }

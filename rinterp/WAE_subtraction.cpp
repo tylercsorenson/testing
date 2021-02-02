@@ -37,11 +37,10 @@ unsigned WAE_subtraction::solve() {
 }
 
 WAE *WAE_subtraction::subst(WAE *id, WAE *what) {
-    WAE *temp = lhs->subst(id, what);
+    WAE *temp = new WAE_subtraction(lhs->subst(id, what), rhs->subst(id, what));
     delete lhs;
-    lhs = temp;
-    temp = rhs->subst(id, what);
+    lhs = nullptr;
     delete rhs;
-    rhs = temp;
-    return this;
+    rhs = nullptr;
+    return temp;
 }
